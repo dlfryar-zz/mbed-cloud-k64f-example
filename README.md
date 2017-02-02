@@ -2,8 +2,7 @@
 
 mbed target board FRDM-K64F with a .96 OLED Grove Display and mbed cloud client
 
-
-# mbed new cloud-target-project && cd cloud-target-project
+mbed new mbed-cloud-k64f-example && cd mbed-cloud-k64f-example
 
 virtualenv .venv && source .venv/bin/activate
 
