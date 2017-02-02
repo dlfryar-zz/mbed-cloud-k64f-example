@@ -15,7 +15,7 @@ wget http://www.nxp.com/files-static/graphic/logo_external/MBED_ENABLED_LOGO_100
 
 mbed add http://developer.mbed.org/teams/Freescale/code/FXOS8700Q
 
-###### A blank graphic ######
+###### BLANK CLEAR SCREEN GRAPHIC ######
 
 convert -size 96x96 xc:#000000 blank.bmp
 
