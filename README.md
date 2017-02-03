@@ -32,6 +32,7 @@ mbed add https://developer.mbed.org/users/danielashercohen/code/SeeedGrayOLED/
 wget http://www.nxp.com/files-static/graphic/logo_external/MBED_ENABLED_LOGO_100X100.jpg
 
 // Optionally get the firmware flashing tool
+
 wget https://gist.githubusercontent.com/mbartling/359fe8df6fd785e8960d566fb3c3b479/raw/2d7fd3c131c3e33bfefe1fa12e1024987039b312/flash.py
 
 // Add the library for the motion sensor part on the FRDM-K64F board
