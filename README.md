@@ -65,7 +65,7 @@ sed -i.bak 's/unsigned char/char/' blank.h
 ### MBED LOGO
 
 // We need to convert the original image we downloaded with wget to a 96x96 to fit on the display
-// notice it's also filling the edges and flipping it so we fill the display it the orientation is correct
+notice it's also filling the edges and flipping it so we fill the display it the orientation is correct
 
 convert MBED_ENABLED_LOGO_100X100.jpg -resize 96x96 -background white -gravity center -extent 96x96 -flip MBED_ENABLED_LOGO_96X96.bmp
 
@@ -92,7 +92,7 @@ sed -i.bak 's/unsigned char/char/' logo.h
 mbed compile -m K64F -t GCC_ARM
 
 // Optional flash tool which copies the firmware binary to the board and sends a serial break
-// command to reset and start executing the new code.  Otherwise just drag over the compiled
-// binary to the DAPLINK connected USB storage device and reset the board
+command to reset and start executing the new code.  Otherwise just drag over the compiled
+binary to the DAPLINK connected USB storage device and reset the board
 
 ./flash.py
