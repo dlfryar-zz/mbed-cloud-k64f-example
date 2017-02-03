@@ -29,7 +29,7 @@ int main() {
     cls();
     SeeedGrayOled.setGrayLevel(15); //Set Grayscale level
     SeeedGrayOled.drawBitmap(ARM_logo_96X96_mono_img,96*96/8);
-    wait(3.0);
+    wait(2.0);
 
     // Application that uses libraries for sensors and a display on K64F with Grove OLED
     // - One i2c display and a couple of onboard sensors

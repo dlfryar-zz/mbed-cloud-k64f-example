@@ -82,7 +82,7 @@ xxd -i MBED_ENABLED_LOGO_96X96_LOGO.img logo.h
 
 ### ARM STARTUP LOGO
 
-convert ARM-logo.jpeg -resize 96x96 -background white -gravity center -extent 96x96 -flip ARM-logo_96X96.bmp
+convert ARM-logo.jpg -resize 96x96 -background white -gravity center -extent 96x96 -flip ARM-logo_96X96.bmp
 
 convert ARM-logo_96X96.bmp -monochrome -colors 2 ARM-logo_96X96-mono.bmp
 
