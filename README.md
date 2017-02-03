@@ -62,7 +62,7 @@ xxd -i blank_96X96.img blank.h
 sed -i.bak 's/unsigned char/char/' blank.h
 
 
-### MBED LOGO
+### ARM MBED ENABLED LOGO
 
 // We need to convert the original image we downloaded with wget to a 96x96 to fit on the display
 notice it's also filling the edges and flipping it so we fill the display it the orientation is correct

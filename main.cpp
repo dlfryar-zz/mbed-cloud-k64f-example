@@ -1,10 +1,12 @@
 #include "mbed.h"
+// OLE42178P Seeed Studio OLED display 96 x 96
 #include "SeeedGrayOLED.h"
-#include "logo.h"
-#include "blank.h"
-
-// Accelerometer & Magnetometer
+// FXOS8700Q MotionSensor Accelerometer & Magnetometer
 #include "FXOS8700Q.h"
+// mbed enabled logo
+#include "logo.h"
+// blank black image
+#include "blank.h"
 
 I2C i2c(PTE25, PTE24);
 FXOS8700QAccelerometer acc(i2c, FXOS8700CQ_SLAVE_ADDR1); // Proper Ports and I2C Address for K64F Freedom board
@@ -17,10 +19,10 @@ void print_acc_mag();
 void cls();
 
 int main() {
-    printf("Starting up K64F board in main.ccp/main()\r\n");
+    printf("Starting up K64F board in main.cpp/main()\r\n");
     acc.enable(); // enable the FXOS8700Q Accelerometer
     mag.enable(); // enable the FXOS8700Q Magnetometer
-    SeeedGrayOled.init();             //initialize SEEED OLED display
+    SeeedGrayOled.init(); //initialize SEEED OLED display
 
     // Application that uses libraries for sensors and a display on K64F with Grove OLED
     // - One i2c display and a couple of onboard sensors
@@ -35,13 +37,13 @@ int main() {
 
     while (true) {
       cls();
-      SeeedGrayOled.setTextXY(0,0);  //set Cursor to first line, 0th column
-      SeeedGrayOled.clearDisplay();     //Clear Display.
+      SeeedGrayOled.setTextXY(0,0); //set Cursor to first line, 0th column
+      SeeedGrayOled.clearDisplay(); //Clear Display.
       SeeedGrayOled.setNormalDisplay(); //Set Normal Display Mode
       SeeedGrayOled.setVerticalMode();
 
       for(char i=0; i < 12 ; i++) {
-        SeeedGrayOled.setTextXY(i,0);  //set Cursor to first line, 0th column
+        SeeedGrayOled.setTextXY(i,0); //set Cursor to first line, 0th column
         SeeedGrayOled.setGrayLevel(i); //Set Grayscale level. Any number between 0 - 15.
         SeeedGrayOled.putString("Hello World"); //Print Hello World
         wait_ms(5.0);
@@ -101,26 +103,26 @@ int main() {
       printf("FXOS8700Q.MotionSensor: X=%d Y=%d Z=%d  ", raX, raY, raZ);
       printf("    MAG: X=%d Y=%d Z=%d\r\n\n", rmX, rmY, rmZ);
 
-      SeeedGrayOled.clearDisplay();     //Clear Display.
+      SeeedGrayOled.clearDisplay(); //Clear Display.
       SeeedGrayOled.setNormalDisplay(); //Set Normal Display Mode
       SeeedGrayOled.setVerticalMode();
 
-      SeeedGrayOled.setGrayLevel(15); //Set Grayscale level. Any number between 0 - 15.
+      SeeedGrayOled.setGrayLevel(15); //Set Grayscale level
 
-      SeeedGrayOled.setTextXY(0,0);  //set Cursor to first line, 0th column
+      SeeedGrayOled.setTextXY(0,0); //set Cursor to first line, 0th column
       SeeedGrayOled.putString("FXOS8700Q");
 
-      SeeedGrayOled.setTextXY(1,0);  //set Cursor to first line, 0th column
+      SeeedGrayOled.setTextXY(1,0); //set Cursor to second line, 0th column
       SeeedGrayOled.putString("MotionSensor");
 
-      SeeedGrayOled.setTextXY(2,0);  //set Cursor to first line, 0th column
+      SeeedGrayOled.setTextXY(2,0); //set Cursor to third line, 0th column
       sz = snprintf(NULL, 0, "Who Am I=%X", acc.whoAmI());
       buf = (char *)malloc(sz + 1); /* make sure you check for != NULL in real code */
       snprintf(buf, sz+1, "Who Am I=%X", acc.whoAmI());
       SeeedGrayOled.putString(buf);
       free(buf);
 
-      SeeedGrayOled.setTextXY(3,0);  //set Cursor to first line, 0th column
+      SeeedGrayOled.setTextXY(3,0);  //set Cursor to fourth line, 0th column
       sz = snprintf(NULL, 0, "ACC:X=%1.4f Y=%1.4f Z=%1.4f  ", acc_data.x, acc_data.y, acc_data.z);
       buf = (char *)malloc(sz + 1); /* make sure you check for != NULL in real code */
       snprintf(buf, sz+1, "ACC:X=%1.4f Y=%1.4f Z=%1.4f  ", acc_data.x, acc_data.y, acc_data.z);
@@ -131,6 +133,6 @@ int main() {
     }
 
     void cls() {
-      SeeedGrayOled.setGrayLevel(0); //Set Grayscale level. Any number between 0 - 15.
+      SeeedGrayOled.setGrayLevel(0); //Set Grayscale level
       SeeedGrayOled.drawBitmap(blank_96X96_img,96*96/8);
     }
