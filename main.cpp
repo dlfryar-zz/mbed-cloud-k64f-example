@@ -7,6 +7,8 @@
 #include "logo.h"
 // blank black image
 #include "blank.h"
+// arm logo
+#include "armlogo.h" 
 
 I2C i2c(PTE25, PTE24);
 FXOS8700QAccelerometer acc(i2c, FXOS8700CQ_SLAVE_ADDR1); // Proper Ports and I2C Address for K64F Freedom board
@@ -23,6 +25,11 @@ int main() {
     acc.enable(); // enable the FXOS8700Q Accelerometer
     mag.enable(); // enable the FXOS8700Q Magnetometer
     SeeedGrayOled.init(); //initialize SEEED OLED display
+
+    cls();
+    SeeedGrayOled.setGrayLevel(15); //Set Grayscale level
+    SeeedGrayOled.drawBitmap(ARM_logo_96X96_mono_img,96*96/8);
+    wait(3.0);
 
     // Application that uses libraries for sensors and a display on K64F with Grove OLED
     // - One i2c display and a couple of onboard sensors

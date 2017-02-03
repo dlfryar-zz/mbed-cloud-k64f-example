@@ -31,6 +31,10 @@ mbed add https://developer.mbed.org/users/danielashercohen/code/SeeedGrayOLED/
 
 wget http://www.nxp.com/files-static/graphic/logo_external/MBED_ENABLED_LOGO_100X100.jpg
 
+// Grab the ARM logo from a public source
+
+wget http://img.technews.co/wp-content/uploads/2015/05/ARM-logo.jpg
+
 // Optionally get the firmware flashing tool
 
 wget https://gist.githubusercontent.com/mbartling/359fe8df6fd785e8960d566fb3c3b479/raw/2d7fd3c131c3e33bfefe1fa12e1024987039b312/flash.py
@@ -57,11 +61,6 @@ cat blank_96X96.bmp | dd skip=146 bs=1 of=blank_96X96.img
 
 xxd -i blank_96X96.img blank.h
 
-// Remove unsigned from header file
-
-sed -i.bak 's/unsigned char/char/' blank.h
-
-
 ### ARM MBED ENABLED LOGO
 
 // We need to convert the original image we downloaded with wget to a 96x96 to fit on the display
@@ -81,9 +80,15 @@ cat MBED_ENABLED_LOGO_96X96_LOGO.bmp | dd skip=146 bs=1 of=MBED_ENABLED_LOGO_96X
 
 xxd -i MBED_ENABLED_LOGO_96X96_LOGO.img logo.h
 
-// Remove unsigned from header file
+### ARM STARTUP LOGO
 
-sed -i.bak 's/unsigned char/char/' logo.h
+convert ARM-logo.jpeg -resize 96x96 -background white -gravity center -extent 96x96 -flip ARM-logo_96X96.bmp
+
+convert ARM-logo_96X96.bmp -monochrome -colors 2 ARM-logo_96X96-mono.bmp
+
+cat ARM-logo_96X96-mono.bmp | dd skip=146 bs=1 of=ARM-logo_96X96-mono.img
+
+xxd -i ARM-logo_96X96-mono.img armlogo.h
 
 ### BUILD and RUN
 
