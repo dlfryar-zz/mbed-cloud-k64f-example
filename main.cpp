@@ -52,7 +52,7 @@ int main() {
       for(char i=0; i<16 ; i++) {
         if (i % 2 !=0) {
           SeeedGrayOled.setGrayLevel(i); //Set Grayscale level. Any number between 0 - 15.
-          SeeedGrayOled.drawBitmap(MBED_ENABLED_LOGO_96X96_LOGO,96*96/8);
+          SeeedGrayOled.drawBitmap(MBED_ENABLED_LOGO_96X96_LOGO_img,96*96/8);
           wait_ms(3.0);
         }
       }
@@ -132,5 +132,5 @@ int main() {
 
     void cls() {
       SeeedGrayOled.setGrayLevel(0); //Set Grayscale level. Any number between 0 - 15.
-      SeeedGrayOled.drawBitmap(blank_96X96_bmp,96*96/8);
+      SeeedGrayOled.drawBitmap(blank_96X96_img,96*96/8);
     }
