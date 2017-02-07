@@ -102,6 +102,10 @@ xxd -i ARM-logo_96X96-mono.img armlogo.h
 
 ### BUILD and RUN
 
+// Generate the header files from images
+
+./create_h_bitmaps.sh
+
 // Build the firmware with the GCC compilers
 
 mbed compile -m K64F -t GCC_ARM
