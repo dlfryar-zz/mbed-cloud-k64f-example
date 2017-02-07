@@ -5,24 +5,11 @@
 #include "FXOS8700Q.h"
 // mbed enabled logo
 #include "MBED_ENABLED_LOGO_100X100.h"
-// blank black image
-#include "blank.h"
+// black image
+#include "black_square.h"
 // arm logo
 #include "ARM-logo.h" 
-#include "L008089.h"
-#include "L008394.h"
-#include "L010071.h"
-#include "L010456.h"
-#include "L011488.h"
-#include "L011850.h"
-#include "L011967.h"
-#include "L012184.h"
-#include "L013046.h"
-#include "L013906.h"
-#include "L013958.h"
-#include "L014178.h"
-#include "L014513.h"
-#include "L014801.h"
+#include "qsg.h"
 
 I2C i2c(PTE25, PTE24);
 FXOS8700QAccelerometer acc(i2c, FXOS8700CQ_SLAVE_ADDR1); // Proper Ports and I2C Address for K64F Freedom board
@@ -31,7 +18,7 @@ FXOS8700QMagnetometer mag(i2c, FXOS8700CQ_SLAVE_ADDR1); // Proper Ports and I2C 
 // Setup OLED with proper i2c clock and data
 SeeedGrayOLED SeeedGrayOled(PTE25, PTE24);
 
-void draw_profile_pics();
+void draw_bitmap_pics();
 void draw_mbed_logo();
 void draw_arm_logo();
 void print_text();
@@ -58,13 +45,15 @@ int main() {
   while (true) {
     cls();
     draw_arm_logo();
-    wait(1);
-    draw_profile_pics();
+    wait(3);
+    draw_bitmap_pics();
     wait(1);
     draw_mbed_logo();
     wait(1);
+    cls();
     print_acc_mag();
     wait(1);
+    cls();
     print_text();
     wait(1);
   }
@@ -72,7 +61,7 @@ int main() {
 
 
 void print_text() {
-  cls();
+  // cls();
   SeeedGrayOled.setTextXY(0,0); //set Cursor to first line, 0th column
   SeeedGrayOled.clearDisplay(); //Clear Display.
   SeeedGrayOled.setNormalDisplay(); //Set Normal Display Mode
@@ -87,34 +76,33 @@ void print_text() {
 }
 
 void draw_arm_logo() {
-  // cls();
   SeeedGrayOled.setGrayLevel(15); //Set Grayscale level
-  SeeedGrayOled.drawBitmap(ARM_logo_96X96_mono_img,96*96/8);
+  SeeedGrayOled.drawBitmap(ARM_logo_96X96_mono_bmp,96*96/8);
 }
 
-void draw_profile_pics() {
+void draw_bitmap_pics() {
   SeeedGrayOled.setGrayLevel(15); //Set Grayscale level
-  unsigned char *bitmaps[] = {L008089_96X96_mono_img,L008394_96X96_mono_img,L010071_96X96_mono_img,
-                              L010456_96X96_mono_img,L011488_96X96_mono_img,L011850_96X96_mono_img,
-                              L011967_96X96_mono_img,L012184_96X96_mono_img,L013046_96X96_mono_img,
-                              L013906_96X96_mono_img,L013958_96X96_mono_img,L014178_96X96_mono_img,
-                              L014513_96X96_mono_img,L014801_96X96_mono_img};
+  unsigned char *bitmaps[] = {qsg_96X96_mono_bmp};
 
   for (int j=0; j<sizeof(bitmaps)/sizeof(unsigned char*); j++) {
     SeeedGrayOled.drawBitmap(bitmaps[j],96*96/8);
-    wait_ms(100);
+    wait_ms(200);
   }
 }
 
 void draw_mbed_logo() {
-  // cls();
+#ifdef LOOP_GRAY_LEVELS
   for(char i=0; i<16; i++) {
     if (i % 2 !=0) {
       SeeedGrayOled.setGrayLevel(i); //Set Grayscale level. Any number between 0 - 15.
-      SeeedGrayOled.drawBitmap(MBED_ENABLED_LOGO_100X100_96X96_mono_img,96*96/8);
+      SeeedGrayOled.drawBitmap(MBED_ENABLED_LOGO_100X100_96X96_mono_bmp,96*96/8);
       wait_ms(3.0);
     }
   }
+#else
+  SeeedGrayOled.setGrayLevel(15); //Set Grayscale level 15.
+  SeeedGrayOled.drawBitmap(MBED_ENABLED_LOGO_100X100_96X96_mono_bmp,96*96/8);
+#endif
 }
 
 void print_acc_mag() {
@@ -186,7 +174,10 @@ void print_acc_mag() {
 }
 
 void cls() {
+  SeeedGrayOled.setNormalDisplay();
+  SeeedGrayOled.setTextXY(0,0);
+  SeeedGrayOled.clearDisplay();
   SeeedGrayOled.setGrayLevel(0); //Set Grayscale level
-  SeeedGrayOled.drawBitmap(blank_96X96_img,96*96/8);
+  SeeedGrayOled.drawBitmap(black_square_96X96_mono_bmp,96*96/8);
 }
 
