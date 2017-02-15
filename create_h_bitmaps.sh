@@ -1,9 +1,15 @@
 #!/bin/bash
 
 IMAGE_DIR="IMAGES"
+IMAGE_HEADER="images.h"
 
 if [ ! -d "$DIRECTORY" ]; then
   mkdir $IMAGE_DIR
+fi
+
+if [ ! -z "$IMAGE_HEADER" ]; then
+  rm -f $IMAGE_HEADER
+  touch $IMAGE_HEADER
 fi
 
 inverse=false
@@ -50,7 +56,7 @@ for url in http://www.nxp.com/files-static/graphic/logo_external/MBED_ENABLED_LO
         # cat "$IMAGE_DIR""/""$filename_two" | dd skip=146 bs=1 of="$IMAGE_DIR""/""$filename_three"
         # xxd -i "$IMAGE_DIR""/""$filename_three" $filename_header
         cd $IMAGE_DIR
-        xxd -s 146 -i $filename_two "../"$filename_header && cd ..
+        xxd -s 146 -i $filename_two >> "../"$IMAGE_HEADER && cd ..
     done
 
 # Clean up all the images we created
