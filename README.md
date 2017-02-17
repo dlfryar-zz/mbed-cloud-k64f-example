@@ -115,3 +115,23 @@ command to reset and start executing the new code.  Otherwise just drag over the
 binary to the DAPLINK connected USB storage device and reset the board
 
 ./flash.py
+
+### LATEST DIRECTIONS
+
+mbed add https://github.com/ARMmbed/mbed-os
+
+mbed add https://developer.mbed.org/users/sam_grove/code/BufferedSerial
+
+mbed add https://developer.mbed.org/teams/Freescale/code/FXOS8700Q
+
+mbed add https://developer.mbed.org/users/danielashercohen/code/SeeedGrayOLED
+
+mbed add https://github.com/ARMmbed/mbed-cloud-client
+
+mbed update
+
+./create_h_bitmaps.sh
+
+cp SOMEPATH/identity_dev_security.c .
+
+mbed compile -m k64f -t gcc_arm -DYOTTA_CFG_MBED_TRACE -c
