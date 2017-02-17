@@ -1,0 +1,31 @@
+{
+    "macros": ["MBEDTLS_USER_CONFIG_FILE=\"mbedtls_mbed_client_config.h\"",
+               "MBED_CLOUD_CLIENT_USER_CONFIG_FILE=\"mbed_cloud_client_user_config.h\""],
+    "target_overrides": {
+        "*": {
+            "platform.stdio-baud-rate":115200,
+            "platform.stdio-convert-newlines":true,
+            "mbed-client.sn-coap-max-blockwise-payload-size": 1024,
+            "nanostack-hal.event_loop_thread_stack_size": 8192,
+            "mbed-trace.enable":null
+        }
+    },
+    "config": {
+        "network-interface":{
+            "help": "options are ETHERNET,WIFI,MESH_LOWPAN_ND,MESH_THREAD",
+            "value": "ETHERNET"
+        },
+        "wifi-ssid": {
+            "help": "WiFi SSID",
+            "value": "\"SSID\""
+        },
+        "wifi-password": {
+            "help": "WiFi Password",
+            "value": "\"Password\""
+        },
+        "developer-mode": {
+            "help": "Enable Developer mode to skip Factory enrollment",
+            "value": 1
+        }
+    }
+}
